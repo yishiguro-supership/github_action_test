@@ -1,0 +1,33 @@
+name: 'TEST'
+
+on:
+  push:
+    branches:
+      - action/**
+
+jobs:
+  first_job:
+    name: First Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: hello_world
+        run: |
+          echo "Hello World!"
+      - name: ls_before
+        run: |
+          ls
+      - name: hello_world_2
+        run: |
+          echo "Hello World!" > ./hello_world.txt
+      - name: ls_after
+        run: |
+          ls
+
+  second_job:
+    name: Second Job
+    needs: first_job
+    runs-on: ubuntu-latest
+    steps:
+      - name: ls
+        run: |
+          ls
